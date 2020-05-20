@@ -11,12 +11,12 @@ public class BookTag {
 		
 	}
 	
-	public String getISBN13() {
+	public String getIsbn13() {
 		return isbn13;
 	}
 	
-	public void setISBN13(String isbn13) {
-		this.isbn13 = isbn13;
+	public void setIsbn13(String isbn) {
+		this.isbn13 = isbn;
 	}
 		
 	public String getTagName() {

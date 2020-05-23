@@ -18,8 +18,8 @@ public class BookTagDAOImpl implements BookTagDAO {
 
 	
 	@Override
-	public List<BookTag> getAllTagsForGivenBook(){
-		
+	public List<BookTag> getAllTagsForGivenBook(String isbn) {
+
 		List<BookTag> bookTags = new ArrayList<>();
 		
 		try {
@@ -29,41 +29,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 					+ "WHERE isbn_13 = ?";
 			stmt = connection.prepareStatement(sql);
 			
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				BookTag bookTag = new BookTag();
-
-				bookTag.setIsbn13(rs.getString("isbn_13"));
-				bookTag.setTagName(rs.getString("tag_name"));
-				
-				bookTags.add(bookTag);
-				
-			}
-			
-			rs.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeResources();
-		}
-	
-		return bookTags;
-	}
-
-	@Override
-	public List<BookTag> getBooksWithGivenTag(String tag_name) {
-		
-		List<BookTag> bookTags = new ArrayList<>();
-		
-		try {
-			connection = DAOUtilities.getConnection();
-			String sql = "SELECT book_tags.isbn_13, books.title, book_tags.tag_name "
-					+ "FROM book_tags "
-					+ "INNER JOIN books "
-					+ "ON book_tags.isbn_13 = books.isbn_13";
-			stmt = connection.prepareStatement(sql);
+			stmt.setString(1, isbn);
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -87,77 +53,118 @@ public class BookTagDAOImpl implements BookTagDAO {
 	
 		return bookTags;
 	}
-
-
-	@Override
-	public List<BookTag> addTagToBookByIsbn(String isbn, String tag_name) {
-		
-		List<BookTag> bookTags = new ArrayList<>();
-		
-		try {
-			connection = DAOUtilities.getConnection();
-			String sql = "INSERT INTO book_tags"
-					+ "VALUES (?, ?)";
-			stmt = connection.prepareStatement(sql);
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				BookTag bookTag = new BookTag();
-
-				bookTag.setIsbn13(rs.getString("isbn_13"));
-				bookTag.setTagName(rs.getString("tag_name"));
-				
-				bookTags.add(bookTag);
-				
-			}
-			
-			rs.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeResources();
-		}
 	
-		return bookTags;
-	}
-
-
-	@Override
-	public List<BookTag> deleteTagFromBookByIsbn(String isbn, String tag_name) {
-		
-		List<BookTag> bookTags = new ArrayList<>();
-		
-		try {
-			connection = DAOUtilities.getConnection();
-			String sql = "DELETE FROM book_tags "
-					+ "WHERE tag_name = “?” "
-					+ "AND isbn_13 = ?";
-			stmt = connection.prepareStatement(sql);
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				BookTag bookTag = new BookTag();
-
-				bookTag.setIsbn13(rs.getString("isbn_13"));
-				bookTag.setTagName(rs.getString("tag_name"));
-				
-				bookTags.add(bookTag);
-				
-			}
-			
-			rs.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeResources();
-		}
 	
-		return bookTags;
-	}
+	
+		
+		
+//
+//	@Override
+//	public List<BookTag> getBooksWithGivenTag(String tag_name) {
+//		
+//		List<BookTag> bookTags = new ArrayList<>();
+//		
+//		try {
+//			connection = DAOUtilities.getConnection();
+//			String sql = "SELECT book_tags.isbn_13, books.title, book_tags.tag_name "
+//					+ "FROM book_tags "
+//					+ "INNER JOIN books "
+//					+ "ON book_tags.isbn_13 = books.isbn_13";
+//			stmt = connection.prepareStatement(sql);
+//			
+//			ResultSet rs = stmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				BookTag bookTag = new BookTag();
+//
+//				bookTag.setIsbn13(rs.getString("isbn_13"));
+//				bookTag.setTagName(rs.getString("tag_name"));
+//				
+//				bookTags.add(bookTag);
+//				
+//			}
+//			
+//			rs.close();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			closeResources();
+//		}
+//	
+//		return bookTags;
+//	}
+//
+//
+//	@Override
+//	public List<BookTag> addTagToBookByIsbn(String isbn, String tag_name) {
+//		
+//		List<BookTag> bookTags = new ArrayList<>();
+//		
+//		try {
+//			connection = DAOUtilities.getConnection();
+//			String sql = "INSERT INTO book_tags"
+//					+ "VALUES (?, ?)";
+//			stmt = connection.prepareStatement(sql);
+//			
+//			ResultSet rs = stmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				BookTag bookTag = new BookTag();
+//
+//				bookTag.setIsbn13(rs.getString("isbn_13"));
+//				bookTag.setTagName(rs.getString("tag_name"));
+//				
+//				bookTags.add(bookTag);
+//				
+//			}
+//			
+//			rs.close();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			closeResources();
+//		}
+//	
+//		return bookTags;
+//	}
+//
+//
+//	@Override
+//	public List<BookTag> deleteTagFromBookByIsbn(String isbn, String tag_name) {
+//		
+//		List<BookTag> bookTags = new ArrayList<>();
+//		
+//		try {
+//			connection = DAOUtilities.getConnection();
+//			String sql = "DELETE FROM book_tags "
+//					+ "WHERE tag_name = “?” "
+//					+ "AND isbn_13 = ?";
+//			stmt = connection.prepareStatement(sql);
+//			
+//			ResultSet rs = stmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				BookTag bookTag = new BookTag();
+//
+//				bookTag.setIsbn13(rs.getString("isbn_13"));
+//				bookTag.setTagName(rs.getString("tag_name"));
+//				
+//				bookTags.add(bookTag);
+//				
+//			}
+//			
+//			rs.close();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			closeResources();
+//		}
+//	
+//		return bookTags;
+//	}
 
 	private void closeResources() {
 		try {
@@ -176,5 +183,6 @@ public class BookTagDAOImpl implements BookTagDAO {
 			e.printStackTrace();
 		}
 	}
+	
 	
 }

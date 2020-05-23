@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +19,26 @@ public class BookTagDAOImpl implements BookTagDAO {
 
 	
 	@Override
-	public List<BookTag> getAllTagsForGivenBook(String isbn) {
+	public List<BookTag> getAllTagsForGivenBook(String isbn13) {
 
 		List<BookTag> bookTags = new ArrayList<>();
 		
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "SELECT book_tags.tag_name "
-					+ "FROM book_tags "
-					+ "WHERE isbn_13 = ?";
+			String sql = "SELECT book_tags.tag_name FROM book_tags WHERE isbn_13 = ?";
 			stmt = connection.prepareStatement(sql);
 			
-			stmt.setString(1, isbn);
+			stmt.setString(1, isbn13);
 			
 			ResultSet rs = stmt.executeQuery();
+			
+//		Shows that isbn_13 column not recognized by rs object:
+			
+//			ResultSetMetaData rsmd = rs.getMetaData();
+//			String name = rsmd.getColumnName(2);
+			 
+//			System.out.println(name);
+			
 			
 			while (rs.next()) {
 				BookTag bookTag = new BookTag();

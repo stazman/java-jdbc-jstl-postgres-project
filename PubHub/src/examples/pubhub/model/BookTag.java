@@ -15,8 +15,8 @@ public class BookTag {
 		return isbn13;
 	}
 	
-	public void setIsbn13(String isbn) {
-		this.isbn13 = isbn;
+	public void setIsbn13(String isbn13) {
+		this.isbn13 = isbn13;
 	}
 		
 	public String getTagName() {

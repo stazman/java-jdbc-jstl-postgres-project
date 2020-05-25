@@ -36,6 +36,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
+				
 				BookTag bookTag = new BookTag();
 				
 				bookTag.setIsbn13(isbn13);
@@ -58,6 +59,64 @@ public class BookTagDAOImpl implements BookTagDAO {
 		return bookTags;
 	}
 	
+	
+	
+//	--------------------------------------------------------------------------------------------------------------------
+
+	
+	public List<BookTag> getBooksWithGivenTag(String isbn13) {
+		
+		List<BookTag> bookTags = new ArrayList<>();
+		
+//		List<Book> books = new ArrayList<>();
+		
+ 
+		try {
+			connection = DAOUtilities.getConnection();
+			String sql = "SELECT book_tags.tag_name \n" + 
+					"	FROM book_tags\n" + 
+					"	INNER JOIN books \n" + 
+					"	ON book_tags.isbn_13 = books.isbn_13\n" + 
+					"	WHERE book_tags.isbn_13=?";
+			
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setString(1, isbn13);
+			
+			//????
+			//SetString with book table properties??
+			//try catch block for book but don't close ???
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				BookTag bookTag = new BookTag();
+ 
+//				bookTag.setIsbn13(rs.getString("isbn_13"));
+				bookTag.setTagName(rs.getString("tag_name"));
+				
+				bookTags.add(bookTag);		
+			}
+			
+			//use if books.isbn_13 == bookTags.isbn_13 etc. ???
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResources();
+		}
+		
+		return bookTags;
+	}
+
+	
+	
+	
+	
+	
+//	--------------------------------------------------------------------------------------------------------------------
+
 	
 	
 	@Override

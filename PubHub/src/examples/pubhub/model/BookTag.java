@@ -26,6 +26,11 @@ public class BookTag {
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
 	}
+	
+	@Override
+    public String toString() { 
+        return String.format(this.isbn13 + "\n" + this.tagName); 
+    } 
 
 	
 }

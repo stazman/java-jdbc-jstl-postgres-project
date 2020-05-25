@@ -1,0 +1,2 @@
+INSERT INTO books (isbn_13, title, author, publish_date, price, content) VALUES ('2222222222222', 'Dune', 'Frank Herbert', '1965-08-01', 16.95, null);
+INSERT INTO books (isbn_13, title, author, publish_date, price, content) VALUES ('3333333333333', 'The Grapes of Wrath', 'John Steinbeck', '1939-04-14', 16.95, null);

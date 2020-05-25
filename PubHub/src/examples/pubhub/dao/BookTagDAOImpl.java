@@ -27,26 +27,13 @@ public class BookTagDAOImpl implements BookTagDAO {
 			connection = DAOUtilities.getConnection();
 			
 			String sql = "SELECT book_tags.tag_name FROM book_tags WHERE isbn_13=?";
-
-//			This didn't work: String sql = "SELECT book_tags.tag_name FROM book_tags WHERE \"isbn_13\" = ?";
 			
 			stmt = connection.prepareStatement(sql);
 			
 			stmt.setString(1, isbn13);
 //			stmt.setString(2, tagName);
 			
-			
-			
 			ResultSet rs = stmt.executeQuery();
-			
-			
-//		Below is a way to check that a column/columns is or is not recognized in ResultSet object:
-			
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			String name = rsmd.getColumnName(?);
-//			 
-//			System.out.println(name);
-			
 			
 			while (rs.next()) {
 				BookTag bookTag = new BookTag();
@@ -59,8 +46,6 @@ public class BookTagDAOImpl implements BookTagDAO {
 				bookTags.add(bookTag);
 				
 			}
-			
-			//if book.isbn_13 == book_tag.isbn_13
 			
 			rs.close();
 			
@@ -75,7 +60,36 @@ public class BookTagDAOImpl implements BookTagDAO {
 	
 	
 	
+	@Override
+	public boolean deleteTagFromBookByIsbn(String isbn13, String tagName) {
+ 
+		try {
+			connection = DAOUtilities.getConnection();
+			
+			String sql = "DELETE FROM book_tags WHERE isbn_13=? AND tag_name=?";
+			
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setString(1, isbn13);
+			stmt.setString(2, tagName);
+			
+ 
+			if (stmt.executeUpdate() != 0)
+				return true;
+			else
+				return false;
+ 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			closeResources();
+		}
+
+	}
+
 	private void closeResources() {
+		
 		try {
 			if (stmt != null)
 				stmt.close();

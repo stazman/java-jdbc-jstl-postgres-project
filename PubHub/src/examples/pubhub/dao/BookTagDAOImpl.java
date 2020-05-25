@@ -1,15 +1,14 @@
 package examples.pubhub.dao;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+//import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import examples.pubhub.model.Book;
+//import examples.pubhub.model.Book;
 import examples.pubhub.model.BookTag;
 import examples.pubhub.utilities.DAOUtilities;
 
@@ -20,7 +19,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 
 	
 	@Override
-	public List<BookTag> getAllTagsForGivenBook(String isbn13, String tagName) {
+	public List<BookTag> getAllTagsForGivenBook(String isbn13) {
 		
 		List<BookTag> bookTags = new ArrayList<>();
 		
@@ -34,24 +33,27 @@ public class BookTagDAOImpl implements BookTagDAO {
 			stmt = connection.prepareStatement(sql);
 			
 			stmt.setString(1, isbn13);
-			stmt.setString(2, tagName);
+//			stmt.setString(2, tagName);
 			
 			
 			
 			ResultSet rs = stmt.executeQuery();
 			
-//		Below shows that isbn_13 column is not recognized in ResultSet object:
+			
+//		Below is a way to check that a column/columns is or is not recognized in ResultSet object:
 			
 //			ResultSetMetaData rsmd = rs.getMetaData();
-//			String name = rsmd.getColumnName(1);
+//			String name = rsmd.getColumnName(?);
 //			 
 //			System.out.println(name);
 			
 			
 			while (rs.next()) {
 				BookTag bookTag = new BookTag();
+				
+				bookTag.setIsbn13(isbn13);
 
-				bookTag.setIsbn13(rs.getString("isbn_13"));
+//				bookTag.setIsbn13(rs.getString("isbn_13"));
 				bookTag.setTagName(rs.getString("tag_name"));
 				
 				bookTags.add(bookTag);
@@ -72,133 +74,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 	}
 	
 	
-	public List<BookTag> getBooksWithGivenTag(String isbn13, String tagName) {
-		
-		List<BookTag> bookTags = new ArrayList<>();
-		
-		List<Book> books = new ArrayList<>();
-		
-
-		try {
-			connection = DAOUtilities.getConnection();
-			String sql = "SELECT book_tags.isbn_13, books.title, book_tags.tag_name\n" + 
-					"		FROM book_tags\n" + 
-					"		INNER JOIN books ON book_tags.isbn_13 = books.isbn_13;";
-			
-			stmt = connection.prepareStatement(sql);
-			
-			stmt.setString(1, "isbn_13");
-			stmt.setString(2, "tag_name");
-			
-			//????
-			//SetString with book table properties??
-			//try catch block for book but don't close ???
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				BookTag bookTag = new BookTag();
-
-				bookTag.setIsbn13(rs.getString("isbn_13"));
-				bookTag.setTagName(rs.getString("tag_name"));
-				
-				bookTags.add(bookTag);		
-			}
-			
-			//use if books.isbn_13 == bookTags.isbn_13 etc. ???
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeResources();
-		}
-		
-		return bookTags;
-	}
-
-		
-		
-//
-//	@Override
-//	public List<BookTag> getBooksWithGivenTag(String tag_name) {
-//		
-//		List<BookTag> bookTags = new ArrayList<>();
-//		
-//		try {
-//			connection = DAOUtilities.getConnection();
-//			String sql = "SELECT book_tags.isbn_13, books.title, book_tags.tag_name "
-//					+ "FROM book_tags "
-//					+ "INNER JOIN books "
-//					+ "ON book_tags.isbn_13 = books.isbn_13";
-//			stmt = connection.prepareStatement(sql);
-//			
-//			ResultSet rs = stmt.executeQuery();
-//			
-//			while (rs.next()) {
-//				BookTag bookTag = new BookTag();
-//
-//				bookTag.setIsbn13(rs.getString("isbn_13"));
-//				bookTag.setTagName(rs.getString("tag_name"));
-//				
-//				bookTags.add(bookTag);
-//				
-//			}
-//			
-//			rs.close();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			closeResources();
-//		}
-//	
-//		return bookTags;
-//	}
-//
-//
-//	@Override
-//	public List<BookTag> addTagToBookByIsbn(String isbn, String tag_name) {
-//		
-//		List<BookTag> bookTags = new ArrayList<>();
-//		
-//		try {
-//			connection = DAOUtilities.getConnection();
-//			String sql = "INSERT INTO book_tags"
-//					+ "VALUES (?, ?)";
-//			stmt = connection.prepareStatement(sql);
-//			
-//			ResultSet rs = stmt.executeQuery();
-//			
-//			while (rs.next()) {
-//				BookTag bookTag = new BookTag();
-//
-//				bookTag.setIsbn13(rs.getString("isbn_13"));
-//				bookTag.setTagName(rs.getString("tag_name"));
-//				
-//				bookTags.add(bookTag);
-//				
-//			}
-//			
-//			rs.close();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			closeResources();
-//		}
-//	
-//		return bookTags;
-//	}
-//
-//
 	
-
-
-
-//	
-//		return bookTags;
-//	}
-
 	private void closeResources() {
 		try {
 			if (stmt != null)

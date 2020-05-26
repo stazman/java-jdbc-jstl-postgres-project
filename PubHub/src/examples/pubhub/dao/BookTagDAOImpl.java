@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 //import java.sql.ResultSetMetaData;
+//import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 //	--------------------------------------------------------------------------------------------------------------------
 
 	
-	public List<BookTag> getBooksWithGivenTag(String isbn13) {
+	public List<BookTag> getBooksWithGivenTag(String tagName) {
 		
 		List<BookTag> bookTags = new ArrayList<>();
 		
@@ -73,19 +74,16 @@ public class BookTagDAOImpl implements BookTagDAO {
  
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "SELECT book_tags.tag_name \n" + 
-					"	FROM book_tags\n" + 
-					"	INNER JOIN books \n" + 
+			
+			String sql = "SELECT books.title, book_tags.tag_name \n" + 
+					"	FROM books\n" + 
+					"	INNER JOIN book_tags \n" + 
 					"	ON book_tags.isbn_13 = books.isbn_13\n" + 
-					"	WHERE book_tags.isbn_13=?";
+					"	WHERE tag_name=?";
 			
 			stmt = connection.prepareStatement(sql);
 			
-			stmt.setString(1, isbn13);
-			
-			//????
-			//SetString with book table properties??
-			//try catch block for book but don't close ???
+			stmt.setString(1, tagName);
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -99,8 +97,8 @@ public class BookTagDAOImpl implements BookTagDAO {
 				bookTags.add(bookTag);		
 			}
 			
-			//use if books.isbn_13 == bookTags.isbn_13 etc. ???
-		
+			rs.close();
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -112,6 +110,59 @@ public class BookTagDAOImpl implements BookTagDAO {
 
 	
 	
+//	--------------------------------------------------------------------------------------------------------------------
+
+	
+	
+	@Override
+	public List<BookTag> addTagToBookByIsbn(String isbn13, String tagName){
+		
+		List<BookTag> bookTags = new ArrayList<>();
+		
+		try {
+			
+			connection = DAOUtilities.getConnection();
+			
+			String sql = "INSERT INTO book_tags (isbn_13, tag_name) VALUES (?,?)";
+			
+			stmt = connection.prepareStatement(sql);
+			
+			stmt.setString(1, isbn13);
+			stmt.setString(2, tagName);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+//			ResultSetMetaData rsmd = rs.getMetaData();
+//			String name = rsmd.getColumnName(2);
+//					 
+//			System.out.println(name);
+
+
+			
+			
+			while (rs.next()) {
+				
+				BookTag bookTag = new BookTag();
+				
+				bookTag.setIsbn13(rs.getString("isbn_13"));
+				
+				bookTag.setTagName(rs.getString("tag_name"));
+				
+				bookTags.add(bookTag);
+				
+			}
+			
+			rs.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {	
+			closeResources();
+		}
+		
+		return bookTags;
+		
+	};
 	
 	
 	
@@ -146,6 +197,12 @@ public class BookTagDAOImpl implements BookTagDAO {
 		}
 
 	}
+	
+	
+	
+//	--------------------------------------------------------------------------------------------------------------------
+
+	
 
 	private void closeResources() {
 		

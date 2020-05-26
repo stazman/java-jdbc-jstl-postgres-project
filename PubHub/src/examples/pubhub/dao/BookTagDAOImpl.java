@@ -3,13 +3,10 @@ package examples.pubhub.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-//import java.sql.ResultSetMetaData;
-//import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import examples.pubhub.model.Book;
 import examples.pubhub.model.BookTag;
 import examples.pubhub.utilities.DAOUtilities;
 
@@ -32,7 +29,6 @@ public class BookTagDAOImpl implements BookTagDAO {
 			stmt = connection.prepareStatement(sql);
 			
 			stmt.setString(1, isbn13);
-//			stmt.setString(2, tagName);
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -65,36 +61,31 @@ public class BookTagDAOImpl implements BookTagDAO {
 //	--------------------------------------------------------------------------------------------------------------------
 
 	
-	public List<BookTag> getBooksWithGivenTag(String tagName) {
+	@Override
+	public List<BookTag> getBooksWithGivenTag(String title) {
 		
 		List<BookTag> bookTags = new ArrayList<>();
 		
-//		List<Book> books = new ArrayList<>();
-		
- 
 		try {
 			connection = DAOUtilities.getConnection();
 			
-			String sql = "SELECT books.title, book_tags.tag_name \n" + 
-					"	FROM books\n" + 
-					"	INNER JOIN book_tags \n" + 
-					"	ON book_tags.isbn_13 = books.isbn_13\n" + 
-					"	WHERE tag_name=?";
+			String sql = "SELECT * FROM books b WHERE b.isbn_13 IN (\n" + 
+					"    SELECT bt.isbn_13 FROM book_tags bt WHERE bt.tag_name = ?)";
 			
 			stmt = connection.prepareStatement(sql);
 			
-			stmt.setString(1, tagName);
+			stmt.setString(1, title);
 			
 			ResultSet rs = stmt.executeQuery();
-			
+
 			while (rs.next()) {
 				
 				BookTag bookTag = new BookTag();
  
-//				bookTag.setIsbn13(rs.getString("isbn_13"));
-				bookTag.setTagName(rs.getString("tag_name"));
+				bookTag.setIsbn13(rs.getString("isbn_13"));
 				
-				bookTags.add(bookTag);		
+				bookTags.add(bookTag);
+				
 			}
 			
 			rs.close();
@@ -109,10 +100,8 @@ public class BookTagDAOImpl implements BookTagDAO {
 	}
 
 	
-	
 //	--------------------------------------------------------------------------------------------------------------------
 
-	
 	
 	@Override
 	public List<BookTag> addTagToBookByIsbn(String isbn13, String tagName){
@@ -131,14 +120,6 @@ public class BookTagDAOImpl implements BookTagDAO {
 			stmt.setString(2, tagName);
 			
 			ResultSet rs = stmt.executeQuery();
-			
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			String name = rsmd.getColumnName(2);
-//					 
-//			System.out.println(name);
-
-
-			
 			
 			while (rs.next()) {
 				
@@ -165,9 +146,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 	};
 	
 	
-	
 //	--------------------------------------------------------------------------------------------------------------------
-
 	
 	
 	@Override
@@ -199,10 +178,8 @@ public class BookTagDAOImpl implements BookTagDAO {
 	}
 	
 	
-	
 //	--------------------------------------------------------------------------------------------------------------------
 
-	
 
 	private void closeResources() {
 		

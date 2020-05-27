@@ -112,7 +112,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 			
 			connection = DAOUtilities.getConnection();
 			
-			String sql = "INSERT INTO book_tags (isbn_13, tag_name) VALUES (?,?)";
+			String sql = "INSERT INTO book_tags (isbn_13, tag_name) VALUES (?,?) RETURNING isbn_13, tag_name";
 			
 			stmt = connection.prepareStatement(sql);
 			

@@ -31,8 +31,7 @@
 					<td>Author:</td>
 					<td>Publish Date:</td>
 					<td>Price:</td>
-					<td></td>
-					<td></td>
+					<td>Tags:</td>
 				</tr>
 			</thead>
 			<tbody>

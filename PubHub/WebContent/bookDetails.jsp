@@ -45,12 +45,12 @@
 		      <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Price" required="required" value="${book.price }" />
 		    </div>
 		  </div>
-		  <div class="form-group">
+		  <%-- <div class="form-group">
 		    <label for="price" class="col-sm-4 control-label">Tags</label>
 		    <div class="col-sm-5">
 		      <input type="number" step="0.01" class="form-control" id="tags" name="tags" placeholder="Tags" required="required" value="${book.tags }" />
 		    </div>
-		  </div>
+		  </div> --%>
 		  <div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-1">
 		      <button type="submit" class="btn btn-info">Update</button>

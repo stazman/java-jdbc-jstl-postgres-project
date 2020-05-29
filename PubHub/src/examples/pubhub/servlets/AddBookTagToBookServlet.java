@@ -8,16 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class addBookTagToBook
+ * Servlet implementation class AddBookTagToBookServlet
  */
-@WebServlet("/addBookTagToBook")
-public class addBookTagToBook extends HttpServlet {
+@WebServlet("/AddBookTagToBookServlet")
+public class AddBookTagToBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public addBookTagToBook() {
+    public AddBookTagToBookServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 

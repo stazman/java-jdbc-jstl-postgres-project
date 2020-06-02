@@ -1,4 +1,4 @@
-	<!-- Header -->
+<!-- Header -->
 	<jsp:include page="header.jsp" />
 	
 	<!-- JSTL includes -->
@@ -31,45 +31,20 @@
 					<td>Author:</td>
 					<td>Publish Date:</td>
 					<td>Price:</td>
-					<!-- <td>Tags:</td> -->
+					<td>Tags:</td>
+					<td></td>
 				</tr>
 			</thead>
 			<tbody>
-			
-			<!-- What does this represent??? Check videos -->
-			
 				<c:forEach var="book" items="${books}">
 					<tr>
 						<td><c:out value="${book.isbn13}" /></td>
+						
 						<td><c:out value="${book.title}" /></td>
-						<td><c:out value="${book.author}" /></td>						
+						<td><c:out value="${book.author}" /></td>
+						<td><c:out value="${book.publishDate}" /></td>
 						<td><fmt:formatNumber value="${book.price }" type="CURRENCY"/></td>
-						
-						
-						<!-- 
-
-						Not <td><c:out value="${book.tags}" /></td>
-						
-						// BREAK
-						
-						// if (getBookByIsbn13.isbn13 == book.isbn13)
-						
-								loop over tag names (getBookByIsbn13.tag_name)
-								
-								return and display tag names
-								
-								continue
-								
-								
-							else 
-							
-								
-								continue
-								
-
-						 -->
-					
-						
+						<td><c:out value="test" /></td>	
 						<td><form action="DownloadBook" method="get">
 								<input type="hidden" name="isbn13" value="${book.isbn13}">
 								<button class="btn btn-success">Download</button>

@@ -45,21 +45,50 @@
 		      <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Price" required="required" value="${book.price }" />
 		    </div>
 		  </div>
-		  <%-- <div class="form-group">
-		    <label for="price" class="col-sm-4 control-label">Tags</label>
-		    <div class="col-sm-5">
-		      <input type="number" step="0.01" class="form-control" id="tags" name="tags" placeholder="Tags" required="required" value="${book.tags }" />
-		    </div>
-		  </div> --%>
 		  <div class="form-group">
 		    <div class="col-sm-offset-4 col-sm-1">
 		      <button type="submit" class="btn btn-info">Update</button>
 		    </div>
 		  </div>
 		</form>
-
+		
 	  </div>
 	</header>
+	
+	<!-- 
+		
+		Receiving ViewTagsForBook servlet/allTagsForGivenBook jsp
+		
+		<table>
+			<tr>
+				<th>
+					<td>Tags</td>
+					<td></td>
+				</th>
+			</tr>
+			<tr>
+				<td>Tag 1</td>
+				<td>Delete button</td>
+			<tr>
+			<tr>
+				<td>Tag 2</td>
+				<td>Delete button</td>
+			<tr>
+			<tr>
+				<td>Tag 3</td>
+				<td>Delete button</td>
+			<tr>
+			<tr>
+				<td>Tag 4</td>
+				<td>Delete button</td>
+			<tr>
+		</table>
+		
+		
+		Receive AddBookTagToBook servlet/addTag jsp
+		
+		
+		 -->
 	
 	<!-- Footer -->
 	<jsp:include page="footer.jsp" />

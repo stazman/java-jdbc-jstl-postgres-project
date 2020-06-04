@@ -31,7 +31,6 @@
 					<td>Author:</td>
 					<td>Publish Date:</td>
 					<td>Price:</td>
-					<td>Tags:</td>
 					<td></td>
 				</tr>
 			</thead>
@@ -39,16 +38,15 @@
 				<c:forEach var="book" items="${books}">
 					<tr>
 						<td><c:out value="${book.isbn13}" /></td>
-						
 						<td><c:out value="${book.title}" /></td>
 						<td><c:out value="${book.author}" /></td>
 						<td><c:out value="${book.publishDate}" /></td>
 						<td><fmt:formatNumber value="${book.price }" type="CURRENCY"/></td>
-						<td><c:out value="test" /></td>	
+					<%-- 	<td><c:out value="test" /></td>	 --%>
 						<td><form action="DownloadBook" method="get">
 								<input type="hidden" name="isbn13" value="${book.isbn13}">
 								<button class="btn btn-success">Download</button>
-							</form></td>
+							</form></td>					
 						<td><form action="ViewBookDetails?isbn=${book.isbn13}" method="get">
 								<input type="hidden" name="isbn13" value="${book.isbn13}">
 								<button class="btn btn-primary">Details</button>
@@ -57,8 +55,18 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
 	  </div>
+	  
+	  <!-- //Add/style container to the right of table:
+	  
+	 <div class="container">
+	 
+	 	Click on book details to see relevant topic tags for each book
+		<br><br>
+		Click here to see (search for???) all books that share a specific tag
+	  
+	 </div> -->
+	  
 	</header>
 
 	<!-- Footer -->

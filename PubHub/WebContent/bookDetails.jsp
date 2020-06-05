@@ -8,6 +8,7 @@
 	
 <!-- 	Just some stuff you need -->
 	<header>
+	
 	  <div class="container">
 		
 	<c:choose>
@@ -52,43 +53,14 @@
 		  </div>
 		</form>
 		
+		<form action="ViewTagsForBook" method="get">
+			<input type="hidden" name="isbn13" value="${book.isbn13}">
+			<button type="submit">Get Tags For This Book</button>
+		</form>
+		
 	  </div>
+	  
 	</header>
-	
-	<!-- 
-		
-		Receiving ViewTagsForBook servlet/allTagsForGivenBook jsp
-		
-		<table>
-			<tr>
-				<th>
-					<td>Tags</td>
-					<td></td>
-				</th>
-			</tr>
-			<tr>
-				<td>Tag 1</td>
-				<td>Delete button</td>
-			<tr>
-			<tr>
-				<td>Tag 2</td>
-				<td>Delete button</td>
-			<tr>
-			<tr>
-				<td>Tag 3</td>
-				<td>Delete button</td>
-			<tr>
-			<tr>
-				<td>Tag 4</td>
-				<td>Delete button</td>
-			<tr>
-		</table>
-		
-		
-		Receive AddBookTagToBook servlet/addTag jsp
-		
-		
-		 -->
 	
 	<!-- Footer -->
 	<jsp:include page="footer.jsp" />

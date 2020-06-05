@@ -8,16 +8,14 @@
 	
 <!-- 	<h3> Tags for ${book} </h3>
 
- -->	  <div class="container">
+ -->	<div class="container">
 	
+	  		<c:forEach var="book_tag" items="${book_tags}">
+				<p><c:out value="${book_tag}" /></p>
+  			</c:forEach>
 	
-	${book_tags}
-
-
 	  </div>
 	</header>
-
-
 
 	<!-- Footer -->
 	<jsp:include page="footer.jsp" />

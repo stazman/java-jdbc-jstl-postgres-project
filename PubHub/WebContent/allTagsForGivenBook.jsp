@@ -11,10 +11,18 @@
  -->	<div class="container">
 	
 	  		<c:forEach var="book_tag" items="${book_tags}">
+	  		
 				<p><c:out value="${book_tag}" /></p>
-  			</c:forEach>
+					
+				<form action="RemoveBookTagFromBookServlet" method="post">
+					<input type="hidden" name="book_tag" value="${book_tag}">
+					<button type="submit">Delete</button>
+				</form>
+					
+         	</c:forEach>
 	
-	  </div>
+		</div>
+		
 	</header>
 
 	<!-- Footer -->

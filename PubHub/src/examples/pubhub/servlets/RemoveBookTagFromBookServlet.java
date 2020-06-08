@@ -8,12 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import examples.pubhub.dao.BookTagDAO;
-import examples.pubhub.model.BookTag;
 import examples.pubhub.utilities.DAOUtilities;
 
-/**
- * Servlet implementation class RemoveBookTagFromBookServlet
- */
 @WebServlet("/RemoveBookTagFromBookServlet")
 public class RemoveBookTagFromBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,50 +18,18 @@ public class RemoveBookTagFromBookServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String isbn13 = request.getParameter("isbn13");
-		
 		String tagName = request.getParameter("tagName");
 		
-		BookTagDAO dao  = DAOUtilities.getBookTagDAO();
-		boolean bookTag = dao.deleteTagFromBookByIsbn(isbn13, tagName);
+		BookTagDAO db  = DAOUtilities.getBookTagDAO();
 		
-		request.setAttribute("book_tag", bookTag);
+		//Needs logic to prevent duplicate entries
 		
+		db.deleteTagFromBookByIsbn(isbn13, tagName);
 		
-		request.getRequestDispatcher("bookDetails.jsp").forward(request, response);
-
+		//Needs improved navigation to update list
 		
-		
-		
-		
-		
-		
-//		request.setAttribute("tagName", tagName);
-		
-//		doGet(request, response);
-		
-		
+		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
 		
 	}
 
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-//    public RemoveBookTagFromBookServlet() {
-//        super();
-//        // TODO Auto-generated constructor stub
-//    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	
 }

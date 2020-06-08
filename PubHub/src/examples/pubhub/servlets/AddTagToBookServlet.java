@@ -1,41 +1,42 @@
 package examples.pubhub.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class AddTagToBookServlet
- */
+import examples.pubhub.dao.BookTagDAO;
+import examples.pubhub.utilities.DAOUtilities;
+
 @WebServlet("/AddTagToBook")
 public class AddTagToBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddTagToBookServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
+//	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
+		BookTagDAO db = DAOUtilities.getBookTagDAO();
+
+		String isbn13 = request.getParameter("isbn13");
+		String tagName = request.getParameter("tagName");
+		
+		//Add control flow to check for duplicate entries
+		
+		db.addTagToBookByIsbn(isbn13, tagName);
+		
+		
+		//redirect with new tag shown in list
+				
+		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
+		
+//		response.sendRedirect("allTagsForGivenBook.jsp");
+		
+	}
 }

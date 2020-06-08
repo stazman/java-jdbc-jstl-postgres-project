@@ -8,7 +8,6 @@ public interface BookTagDAO {
 	
 	public List<BookTag> getAllTagsForGivenBook(String isbn13);
 	public List<BookTag> getBooksWithGivenTag(String title);
-	public List<BookTag> addTagToBookByIsbn(String isbn13, String tagName);
+	public boolean addTagToBookByIsbn(String isbn13, String tagName);
 	public boolean deleteTagFromBookByIsbn(String isbn13, String tagName);
 }
-

@@ -104,46 +104,31 @@ public class BookTagDAOImpl implements BookTagDAO {
 
 	
 	@Override
-	public List<BookTag> addTagToBookByIsbn(String isbn13, String tagName){
-		
-		List<BookTag> bookTags = new ArrayList<>();
+	public boolean addTagToBookByIsbn(String isbn13, String tagName){
 		
 		try {
 			
 			connection = DAOUtilities.getConnection();
 			
-			String sql = "INSERT INTO book_tags (isbn_13, tag_name) VALUES (?,?) RETURNING isbn_13, tag_name";
+			String sql = "INSERT INTO book_tags (isbn_13, tag_name) VALUES (?,?)";
 			
 			stmt = connection.prepareStatement(sql);
 			
 			stmt.setString(1, isbn13);
 			stmt.setString(2, tagName);
-			
-			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				
-				BookTag bookTag = new BookTag();
-				
-				bookTag.setIsbn13(rs.getString("isbn_13"));
-				
-				bookTag.setTagName(rs.getString("tag_name"));
-				
-				bookTags.add(bookTag);
-				
-			}
-			
-			rs.close();
+						
+			if (stmt.executeUpdate() != 0)
+				return true;
+			else
+				return false;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {	
+			return false;
+		} finally {
 			closeResources();
 		}
-		
-		return bookTags;
-		
-	};
+	}
 	
 	
 //	--------------------------------------------------------------------------------------------------------------------

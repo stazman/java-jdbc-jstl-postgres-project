@@ -24,28 +24,28 @@ public class TestBookTagDAO {
 	
 //		--------------------------------------------------------------------------------------------------------------------
 		
-/*	
+
 		BookTagDAO btDao2 = new BookTagDAOImpl();
 		
-	    List<BookTag> list2 = btDao2.getBooksWithGivenTag("science fiction");
+	    List<BookTag> list2 = btDao2.getBooksWithGivenTag("fiction");
 	 
 	    for (int i = 0; i < list2.size(); i++){
 	      BookTag t = list2.get(i);
 	      System.out.println(t);
 	    }
 	    
-*/
+
 		
 //		--------------------------------------------------------------------------------------------------------------------
 
 
-		BookTagDAO btDao3 = new BookTagDAOImpl();
-		
-	    boolean didAdd = btDao3.addTagToBookByIsbn("3333333333333", "top ten novels of all time");
-	    
-	    System.out.println(didAdd);
-	    
-	    }
+//		BookTagDAO btDao3 = new BookTagDAOImpl();
+//		
+//	    boolean didAdd = btDao3.addTagToBookByIsbn("3333333333333", "top ten novels of all time");
+//	    
+//	    System.out.println(didAdd);
+//	    
+//	    }
 
 	    
 		
@@ -60,7 +60,7 @@ public class TestBookTagDAO {
 	    System.out.println(didDelete);
 	    
 */
-	    
-	    
+	   
+	}
 }
 	

@@ -41,11 +41,10 @@ public class TestBookTagDAO {
 
 		BookTagDAO btDao3 = new BookTagDAOImpl();
 		
-	    List<BookTag> list3 = btDao3.addTagToBookByIsbn("1111111111111", "cyberpunk");
+	    boolean list3 = btDao3.addTagToBookByIsbn("1111111111111", "cyberpunk");
 	    
-	    for (int i = 0; i < list3.size(); i++){
-	      BookTag t = list3.get(i);
-	      System.out.println(t);
+	    //Needs new logic
+	    
 	    }
 
 	    
@@ -63,6 +62,5 @@ public class TestBookTagDAO {
 */
 	    
 	    
-	}
-	
 }
+	

@@ -41,9 +41,9 @@ public class TestBookTagDAO {
 
 		BookTagDAO btDao3 = new BookTagDAOImpl();
 		
-	    boolean list3 = btDao3.addTagToBookByIsbn("1111111111111", "cyberpunk");
+	    boolean didAdd = btDao3.addTagToBookByIsbn("3333333333333", "top ten novels of all time");
 	    
-	    //Needs new logic
+	    System.out.println(didAdd);
 	    
 	    }
 

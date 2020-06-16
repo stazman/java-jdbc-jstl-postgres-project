@@ -9,7 +9,7 @@
 <!-- 	Just some stuff you need -->
 	<header>
 	
-	  <div class="container">
+	  <div class="container" style="padding-bottom: 75px;">
 		
 	<c:choose>
 	<c:when test="${not empty message }">
@@ -23,6 +23,12 @@
 	
 		<h1>PUBHUB <small>Book Details - ${book.isbn13 }</small></h1>
 		<hr class="book-primary">
+		
+		<form action="ViewTagsForBook" method="get">
+			<input type="hidden" name="isbn13" value="${book.isbn13}">
+			<button type="submit" style="background-color: navy; color: white; padding: 8px 12px;">Get Tags For This Book</button>
+		</form>
+		<br>
 		
 		<form action="UpdateBook" method="post" class="form-horizontal">
 		  
@@ -51,11 +57,6 @@
 		      <button type="submit" class="btn btn-info">Update</button>
 		    </div>
 		  </div>
-		</form>
-		
-		<form action="ViewTagsForBook" method="get">
-			<input type="hidden" name="isbn13" value="${book.isbn13}">
-			<button type="submit">Get Tags For This Book</button>
 		</form>
 		
 	  </div>

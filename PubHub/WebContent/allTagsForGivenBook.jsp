@@ -8,7 +8,7 @@
 	<header style="display:flex;">	
  
  
- 		<div class="container" style="width: 40%; padding-top: 250px; padding-bottom: 200px; margin-right: 10px;">
+ 		<div class="container" style="width: 40%; padding-top: 250px; padding-bottom: 225px; margin-right: 10px;">
 	
 	  		<h3>Tags for this book</h3>
 	  		<br>
@@ -32,7 +32,7 @@
 		</div>
 				
 		
-		<div class="container" style="float: left; width: 30%; padding-top: 250px; padding-bottom: 200px; margin-left: 10px;">
+		<div class="container" style="float: left; width: 30%; padding-top: 250px; padding-bottom: 225px; margin-left: 10px;">
 		
 			<h3>Add a new tag</h3>
 			<br>

@@ -8,7 +8,7 @@
 	
  		<div class="container" style="aligh-items: center; justify-content: center; width: 40%; padding-top: 250px; padding-bottom: 225px; margin-right: 10px;">
 		
-			<h3>Find books with a given tag</h3><br>
+			<h3>Search for Books by Tag</h3><br>
 				
 			<form action="ViewBooksWithGivenTag" method="post" class="form-horizontal">
 	 

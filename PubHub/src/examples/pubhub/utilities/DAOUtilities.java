@@ -42,7 +42,7 @@ public class DAOUtilities {
 		return new BookDAOImpl();
 	}
 	
-	public static BookTagDAO getAllTagsForGivenBook() {
+	public static BookTagDAO getBookTagDAO() {
 		return new BookTagDAOImpl();
 	}
 	

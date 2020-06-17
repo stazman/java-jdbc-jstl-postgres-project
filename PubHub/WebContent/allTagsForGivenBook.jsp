@@ -10,6 +10,16 @@
  
  		<div class="container" style="width: 40%; padding-top: 250px; padding-bottom: 225px; margin-right: 10px;">
 	
+	<c:choose>
+	<c:when test="${not empty message }">
+	  <p class="alert ${messageClass}">${message }</p>
+	<%
+	  session.setAttribute("message", null);
+	  session.setAttribute("messageClass", null);
+	%>
+	</c:when>
+	</c:choose>
+	
 	  		<h3>Tags for this book</h3>
 	  		<br>
 	  		<table class="table table-striped table-hover table-responsive pubhub-datatable">

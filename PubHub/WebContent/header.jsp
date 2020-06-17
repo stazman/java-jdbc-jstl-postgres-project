@@ -52,6 +52,8 @@
                           <li><a href="BookPublishing">Home (Level 100)</a></li>
                           <li class="divider"></li>
                           <li><a href="PublishBook">Publish Book</a></li>
+                          <li class="divider"></li>
+                          <li><a href="ViewBooksWithGivenTag">Search for Books by Tag</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

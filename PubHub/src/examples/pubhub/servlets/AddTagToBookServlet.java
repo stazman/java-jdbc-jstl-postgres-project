@@ -15,11 +15,6 @@ import examples.pubhub.utilities.DAOUtilities;
 public class AddTagToBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
-//	}
-
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		BookTagDAO db = DAOUtilities.getBookTagDAO();
@@ -27,16 +22,17 @@ public class AddTagToBookServlet extends HttpServlet {
 		String isbn13 = request.getParameter("isbn13");
 		String tagName = request.getParameter("tagName");
 		
-		//Add control flow to check for duplicate entries
+		boolean isSuccess = db.addTagToBookByIsbn(isbn13, tagName);
 		
-		db.addTagToBookByIsbn(isbn13, tagName);
-		
-		
-		//redirect with new tag shown in list
-				
-		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
-		
-//		response.sendRedirect("allTagsForGivenBook.jsp");
+		if(isSuccess){
+			request.getSession().setAttribute("message", "Tag added");
+			request.getSession().setAttribute("messageClass", "alert-success");
+			response.sendRedirect(request.getContextPath() + "/BookPublishing");
+		} else {
+			request.getSession().setAttribute("message", "There was a problem adding the tag");
+			request.getSession().setAttribute("messageClass", "alert-danger");
+			request.getRequestDispatcher("bookPublishingHome.jsp").forward(request, response);
+		}
 		
 	}
 }

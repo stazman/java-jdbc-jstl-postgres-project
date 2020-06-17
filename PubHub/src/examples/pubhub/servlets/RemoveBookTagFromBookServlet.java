@@ -14,7 +14,6 @@ import examples.pubhub.utilities.DAOUtilities;
 public class RemoveBookTagFromBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String isbn13 = request.getParameter("isbn13");
@@ -22,13 +21,17 @@ public class RemoveBookTagFromBookServlet extends HttpServlet {
 		
 		BookTagDAO db  = DAOUtilities.getBookTagDAO();
 		
-		//Needs logic to prevent duplicate entries
+		boolean isSuccess = db.deleteTagFromBookByIsbn(isbn13, tagName);
 		
-		db.deleteTagFromBookByIsbn(isbn13, tagName);
-		
-		//Needs improved navigation to update list
-		
-		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
+		if(isSuccess){
+			request.getSession().setAttribute("message", "Tag removed");
+			request.getSession().setAttribute("messageClass", "alert-success");
+			response.sendRedirect(request.getContextPath() + "/BookPublishing");
+		} else {
+			request.getSession().setAttribute("message", "There was a problem removing the tag");
+			request.getSession().setAttribute("messageClass", "alert-danger");
+			request.getRequestDispatcher("bookPublishingHome.jsp").forward(request, response);
+		}
 		
 	}
 

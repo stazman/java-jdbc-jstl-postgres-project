@@ -17,20 +17,19 @@ import examples.pubhub.utilities.DAOUtilities;
 @WebServlet("/ViewTagsForBook")
 public class ViewTagsForBookServlet extends HttpServlet {
 
-private static final long serialVersionUID = 1L;
-
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private static final long serialVersionUID = 1L;
 	
-	String isbn13 = request.getParameter("isbn13");
-	
-	BookTagDAO dao = DAOUtilities.getBookTagDAO();
-	List<BookTag> bookTagList = dao.getAllTagsForGivenBook(isbn13);
-	
-	request.setAttribute("book_tags", bookTagList);
-	
-	request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
-	
-}
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String isbn13 = request.getParameter("isbn13");
+		
+		BookTagDAO dao = DAOUtilities.getBookTagDAO();
+		List<BookTag> bookTagList = dao.getAllTagsForGivenBook(isbn13);
+		
+		request.setAttribute("book_tags", bookTagList);
+		
+		request.getRequestDispatcher("allTagsForGivenBook.jsp").forward(request, response);
+		
+	}
 }
 

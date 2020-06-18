@@ -28,7 +28,7 @@ public class ViewBooksWithGivenTagServlet extends HttpServlet {
 		
 		request.setAttribute("books", books);
 		
-		request.getRequestDispatcher("allBooksWithGivenTag.jsp").forward(request, response);	
+		request.getRequestDispatcher("allBooksWithGivenTag.jsp").forward(request, response);
 		
 	}
 	
@@ -37,5 +37,4 @@ public class ViewBooksWithGivenTagServlet extends HttpServlet {
 		request.getRequestDispatcher("allBooksWithGivenTag.jsp").forward(request, response);	
 		
 	}
-
 }

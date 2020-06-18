@@ -12,6 +12,7 @@ import examples.pubhub.utilities.DAOUtilities;
 
 @WebServlet("/RemoveBookTagFromBookServlet")
 public class RemoveBookTagFromBookServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,5 +35,4 @@ public class RemoveBookTagFromBookServlet extends HttpServlet {
 		}
 		
 	}
-
 }

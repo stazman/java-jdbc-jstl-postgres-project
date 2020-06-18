@@ -13,8 +13,7 @@
 			<form action="ViewBooksWithGivenTag" method="post" class="form-horizontal">
 	 
 			  <div class="form-group" style="margin-left: 140px; margin-right: 0;">
-<!-- 			    <label for="tagName" class="col-sm-4 control-label"></label>
- -->			<div class="col-sm-8">
+				<div class="col-sm-8">
 			     	<input type="text" class="form-control" id="tagName" name="tagName" placeholder="Type in tag name search term(s)" required="required" value="${param.tagName}" />
 			    </div>
 			  </div>

@@ -51,7 +51,6 @@
 			  <input type="hidden" class="form-control" id="isbn13" name="isbn13" required="required" value="${param.isbn13}" />
 			  
 			  <div class="form-group">
-			    <!-- <label for="tagName" class="col-sm-4 control-label"></label> -->
 			    <div>
 			      <input type="text" class="form-control" id="tagName" name="tagName" placeholder="Tag Name" style="width: 60%; margin-left: 100px;" required="required" value="${param.tagName}" />
 			    </div>
